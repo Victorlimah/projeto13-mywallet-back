@@ -5,6 +5,7 @@ import {
   deleteTransaction,
   readTransactions,
 } from "../controllers/transactionsController.js";
+import { tokenValidator } from "../middlewares/tokenMidleware.js";
 import {
   createMidleware,
   deleteMidleware,
@@ -12,20 +13,10 @@ import {
 
 const transactionsRoutes = Router();
 
-transactionsRoutes.get("/transactions", tokenValidator, readTransactions);
+transactionsRoutes.get("/transactions", readTransactions);
 
-transactionsRoutes.post(
-  "/transactions",
-  createMidleware,
-  tokenValidator,
-  createTransaction
-);
+transactionsRoutes.post("/transactions", createTransaction);
 
-transactionsRoutes.delete(
-  "/transactions/:id",
-  deleteMidleware,
-  tokenValidator,
-  deleteTransaction
-);
+transactionsRoutes.delete("/transactions/:id", deleteTransaction);
 
 export default transactionsRoutes;

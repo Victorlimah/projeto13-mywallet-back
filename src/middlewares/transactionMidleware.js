@@ -3,7 +3,7 @@ import joi from "joi";
 export const createMidleware = async (req, res) => {
   const schema = joi.object({
     description: joi.string().required(),
-    value: joi.number().required(),
+    value: joi.required(),
   });
 
   const { error } = schema.validate(req.body, { abortEarly: false });

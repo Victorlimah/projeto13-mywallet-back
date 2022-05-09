@@ -34,9 +34,7 @@ export const readTransactions = async (req, res) => {
       if (realValue.includes("-")) {
         realValue = realValue.replace("-", "").trim();
         outcome += Number(realValue);
-      } else {
-        income += Number(realValue);
-      }
+      } else income += Number(realValue);
 
       realValue = Number(realValue);
     });

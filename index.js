@@ -175,4 +175,29 @@ app.post("/transactions", async (req, res) => {
   }
 });
 
+app.delete("/transactions/:id", async (req, res) => {
+  const { authorization } = req.headers;
+  let token = authorization?.replace("Bearer ", "");
+
+  if (!token) return res.sendStatus(401);
+
+  const session = await db.collection("sessions").findOne({ token });
+  if (!session) return res.sendStatus(401);
+
+  try {
+    const user = await db
+
+      .collection("users")
+      .findOne({ _id: ObjectId(session.user) });
+    if (!user) return res.sendStatus(401);
+
+    const { id } = req.params;
+    await db.collection("transactions").deleteOne({ _id: ObjectId(id) });
+    return res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(500);
+  }
+});
+
 app.listen(5000, () => console.log("Servidor rodando na porta 5000"));

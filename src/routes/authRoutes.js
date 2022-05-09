@@ -9,6 +9,6 @@ import {
 const authRoutes = Router();
 
 authRoutes.post("/sing-in", validateLogin, singIn);
-authRoutes.post("/sing-up", validateRegister, singUp);
+authRoutes.post("/sing-up", singUp);
 
 export default authRoutes;

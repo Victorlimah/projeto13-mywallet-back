@@ -14,5 +14,4 @@ app.use(authRoutes);
 app.use(transactionsRoutes);
 
 const port = process.env.PORT;
-
-app.listen(port, () => console.log(`Servidor rodando na porta ${port}`));
+app.listen(5000, () => console.log(`Servidor rodando na porta ${port}`));
